@@ -1,0 +1,26 @@
+# NexusMobShield configuration.
+#
+# What this does: cancels the specific damage the vanilla /kill command produces (Bukkit calls
+# it DamageCause.KILL), no matter who or what runs that command -- a player, the console, or a
+# hidden command block you haven't found yet. Every other kind of damage (combat, fall, drowning,
+# your other plugins' own effects) is completely untouched. This does not find or remove the
+# rogue command blocks themselves -- it just makes /kill stop working against protected targets
+# until you do. See NexusCmdTracker for actually locating and removing them.
+
+settings:
+  # Master on/off switch. Also toggleable live with /nexusmobshield toggle.
+  enabled: true
+  # If true, /kill is blocked against players too, not just mobs -- recommended, since whatever
+  # can run unauthorized /kill commands against mobs could just as easily be pointed at players
+  # next. Use /nexusmobshield allow <seconds> any time YOU need to run a real /kill yourself.
+  protect-players: true
+  # Entity type names (Bukkit EntityType, e.g. ARMOR_STAND, ITEM_FRAME) that should NOT be
+  # protected -- for anything your other plugins intentionally remove via a real /kill command.
+  # Leave empty unless you find something that needs an exception.
+  exempt-entity-types: []
+
+# A periodic summary instead of one message per blocked kill -- if whatever's doing this is
+# firing fast, logging every single one would just become a second console-spam problem.
+heartbeat:
+  enabled: true
+  summary-interval-seconds: 60
